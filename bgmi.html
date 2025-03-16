@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BGMI Username Finder | Modern Gaming Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        accent: {
+                            50: '#eefaff',
+                            100: '#dcf5ff',
+                            200: '#b3ecff',
+                            300: '#5cddff',
+                            400: '#26cfff',
+                            500: '#00b8ff',
+                            600: '#0090d6',
+                            700: '#0073ad',
+                            800: '#00618f',
+                            900: '#085175',
+                        },
+                        secondary: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            800: '#9f1239',
+                            900: '#881337',
+                        },
+                        tertiary: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            300: '#c4b5fd',
+                            400: '#a78bfa',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'slide-down': 'slideDown 0.8s ease-out',
+                        'slide-left': 'slideLeft 0.8s ease-out',
+                        'slide-right': 'slideRight 0.8s ease-out',
+                        'bounce-slow': 'bounce 3s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'spin-slow': 'spin 8s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'scale': 'scale 1s ease-out',
+                        'wave': 'wave 2.5s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(50px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        slideDown: {
+                            '0%': { transform: 'translateY(-50px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        slideLeft: {
+                            '0%': { transform: 'translateX(50px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        slideRight: {
+                            '0%': { transform: 'translateX(-50px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        scale: {
+                            '0%': { transform: 'scale(0.8)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        },
+                        wave: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '10%': { transform: 'rotate(14deg)' },
+                            '20%': { transform: 'rotate(-8deg)' },
+                            '30%': { transform: 'rotate(14deg)' },
+                            '40%': { transform: 'rotate(-4deg)' },
+                            '50%': { transform: 'rotate(10deg)' },
+                            '60%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(0deg)' },
+                        },
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'hero-pattern': "url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%239C92AC\" fill-opacity=\"0.05\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')",
+                    }
+                },
+            },
+        }
+    </script>
+    <style type="text/css">
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #4b5563;
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(90deg, #00b8ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        
+        .dark .gradient-text {
+            background: linear-gradient(90deg, #38bdf8, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        /* Gradient Border */
+        .gradient-border {
+            position: relative;
+            border-radius: 0.75rem;
+        }
+        
+        .gradient-border::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            border-radius: 0.85rem;
+            background: linear-gradient(45deg, #00b8ff, #7c3aed, #f43f5e);
+            z-index: -1;
+            animation: border-rotate 4s linear infinite;
+        }
+        
+        @keyframes border-rotate {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Shimmer Effect */
+        .shimmer {
+            background: linear-gradient(90deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.2) 50%, 
+                rgba(255, 255, 255, 0) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        /* Loader Animation */
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid #FFF;
+            border-bottom-color: #00b8ff;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+        
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Progress Bar Animation */
+        .progress-bar {
+            height: 4px;
+            background: linear-gradient(90deg, #00b8ff, #7c3aed);
+            animation: progress 2s ease-in-out infinite;
+        }
+        
+        @keyframes progress {
+            0% {
+                width: 0%;
+            }
+            50% {
+                width: 100%;
+            }
+            100% {
+                width: 0%;
+            }
+        }
+
+        /* Pulse Animation */
+        .pulse-ring {
+            position: relative;
+        }
+        
+        .pulse-ring::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border-radius: inherit;
+            animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+        }
+        
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        /* Blob Animation */
+        .blob {
+            background: rgba(0, 184, 255, 0.2);
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(0, 184, 255, 0.2);
+            animation: pulse-blob 2s infinite;
+        }
+        
+        @keyframes pulse-blob {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(0, 184, 255, 0.5);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 20px rgba(0, 184, 255, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(0, 184, 255, 0);
+            }
+        }
+
+        /* 3D Card Effect */
+        .card-3d {
+            transition: transform 0.5s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .card-3d:hover {
+            transform: translateY(-10px) rotateX(5deg);
+        }
+
+        /* Glowing Effect */
+        .glow {
+            box-shadow: 0 0 15px rgba(0, 184, 255, 0.5);
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .glow:hover {
+            box-shadow: 0 0 30px rgba(0, 184, 255, 0.8);
+        }
+
+        /* Typing Animation */
+        .typing {
+            width: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 3s steps(30) forwards;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        /* Shake Animation */
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        /* Success Animation */
+        .success-checkmark {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            display: inline-block;
+            animation: scale 0.5s ease-in-out;
+        }
+        
+        .success-checkmark .check-icon {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            border-radius: 50%;
+            box-sizing: content-box;
+            border: 4px solid #4CAF50;
+        }
+        
+        .success-checkmark .check-icon::before {
+            content: "";
+            position: absolute;
+            top: 48%;
+            left: 27%;
+            transform: rotate(45deg);
+            width: 15%;
+            height: 30%;
+            border-radius: 10px;
+            background-color: #4CAF50;
+            animation: success-check-01 0.8s ease;
+        }
+        
+        .success-checkmark .check-icon::after {
+            content: "";
+            position: absolute;
+            top: 45%;
+            left: 38%;
+            transform: rotate(45deg);
+            width: 40%;
+            height: 15%;
+            border-radius: 10px;
+            background-color: #4CAF50;
+            animation: success-check-02 0.8s ease;
+        }
+        
+        @keyframes success-check-01 {
+            0%, 50% { height: 0; top: 30px; }
+            100% { height: 30%; }
+        }
+        
+        @keyframes success-check-02 {
+            0%, 50% { width: 0; left: 14px; }
+            100% { width: 40%; }
+        }
+    </style>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-all duration-300 bg-hero-pattern">
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 z-[9999] flex items-center justify-center bg-white dark:bg-gray-900 transition-all duration-500">
+        <div class="flex flex-col items-center">
+            <div class="loader"></div>
+            <div class="mt-4 w-48 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                <div class="progress-bar"></div>
+            </div>
+            <p class="mt-4 text-accent-600 dark:text-accent-400 font-medium">Loading awesome experience...</p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="fixed w-full z-50 transition-all duration-300" id="header">
+        <div class="container mx-auto px-4">
+            <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-b-xl shadow-lg py-3 px-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-3">
+                        <div class="relative w-10 h-10">
+                            <div class="absolute inset-0 bg-gradient-to-r from-accent-500 to-tertiary-500 rounded-lg animate-pulse-slow"></div>
+                            <div class="absolute inset-0.5 bg-white dark:bg-gray-800 rounded-lg flex items-center justify-center">
+                                <i class='bx bxs-game text-accent-500 dark:text-accent-400 text-2xl'></i>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="font-bold text-xl gradient-text">BGMI Finder</span>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 block">Pro Version</span>
+                        </div>
+                    </div>
+                    <nav class="hidden lg:flex space-x-8">
+                        <a href="#home" class="nav-link group relative py-2">
+                            <span class="text-gray-700 dark:text-gray-300 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-all duration-300">Home</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-500 group-hover:w-full transition-all duration-300"></span>
+                        </a>
+                        <a href="#finder" class="nav-link group relative py-2">
+                            <span class="text-gray-700 dark:text-gray-300 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-all duration-300">Finder</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-500 group-hover:w-full transition-all duration-300"></span>
+                        </a>
+                        <a href="#features" class="nav-link group relative py-2">
+                            <span class="text-gray-700 dark:text-gray-300 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-all duration-300">Features</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-500 group-hover:w-full transition-all duration-300"></span>
+                        </a>
+                        <a href="#testimonials" class="nav-link group relative py-2">
+                            <span class="text-gray-700 dark:text-gray-300 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-all duration-300">Testimonials</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-500 group-hover:w-full transition-all duration-300"></span>
+                        </a>
+                        <a href="#faq" class="nav-link group relative py-2">
+                            <span class="text-gray-700 dark:text-gray-300 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-all duration-300">FAQ</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-500 group-hover:w-full transition-all duration-300"></span>
+                        </a>
+                        <a href="#contact" class="nav-link group relative py-2">
+                            <span class="text-gray-700 dark:text-gray-300 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-all duration-300">Contact</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-500 group-hover:w-full transition-all duration-300"></span>
+                        </a>
+                    </nav>
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <select id="theme-selector" class="appearance-none bg-gray-100 dark:bg-gray-700 rounded-lg px-3 py-1.5 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500 transition-all">
+                                <option value="light">Light</option>
+                                <option value="dark">Dark</option>
+                                <option value="system">System</option>
+                            </select>
+                            <i class='bx bxs-down-arrow absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400 text-xs pointer-events-none'></i>
+                        </div>
+                        <a href="#finder" class="hidden md:flex items-center space-x-2 bg-accent-500 hover:bg-accent-600 text-white py-2 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-accent-500/30">
+                            <i class='bx bx-search-alt'></i>
+                            <span>Find Player</span>
+                        </a>
+                        <button id="mobile-menu-button" class="lg:hidden text-gray-700 dark:text-gray-300 hover:text-accent-600 dark:hover:text-accent-400 transition-all">
+                            <i class='bx bx-menu text-2xl'></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="lg:hidden hidden">
+            <div class="container mx-auto px-4 py-2">
+                <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-lg rounded-xl shadow-lg p-4 mt-2">
+                    <div class="flex flex-col space-y-3">
+                        <a href="#home" class="mobile-nav-link flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-accent-600 dark:hover:text-accent-400 transition-all py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class='bx bx-home'></i>
+                            <span>Home</span>
+                        </a>
+                        <a href="#finder" class="mobile-nav-link flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-accent-600 dark:hover:text-accent-400 transition-all py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class='bx bx-search-alt'></i>
+                            <span>Finder</span>
+                        </a>
+                        <a href="#features" class="mobile-nav-link flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-accent-600 dark:hover:text-accent-400 transition-all py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class='bx bx-list-ul'></i>
+                            <span>Features</span>
+                        </a>
+                        <a href="#testimonials" class="mobile-nav-link flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-accent-600 dark:hover:text-accent-400 transition-all py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class='bx bx-message-square-dots'></i>
+                            <span>Testimonials</span>
+                        </a>
+                        <a href="#faq" class="mobile-nav-link flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-accent-600 dark:hover:text-accent-400 transition-all py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class='bx bx-help-circle'></i>
+                            <span>FAQ</span>
+                        </a>
+                        <a href="#contact" class="mobile-nav-link flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-accent-600 dark:hover:text-accent-400 transition-all py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class='bx bx-envelope'></i>
+                            <span>Contact</span>
+                        </a>
+                        <div class="pt-2 border-t border-gray-200 dark:border-gray-700">
+                            <a href="#finder" class="flex items-center justify-center space-x-2 bg-accent-500 hover:bg-accent-600 text-white py-2.5 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-accent-500/30">
+                                <i class='bx bx-search-alt'></i>
+                                <span>Find Player Now</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="min-h-screen pt-32 pb-16 overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-10 lg:mb-0 animate-fade-in">
+                    <div class="relative inline-block mb-3">
+                        <span class="inline-block py-1 px-3 bg-accent-100 dark:bg-accent-900 text-accent-600 dark:text-accent-400 rounded-full text-sm font-medium animate-pulse-slow">
+                            #1 BGMI Player Finder
+                        </span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                        Find Any <span class="gradient-text">BGMI</span> Player in Seconds
+                    </h1>
+                    <p class="text-lg text-gray-700 dark:text-gray-300 mb-8 max-w-xl">
+                        The most advanced tool to instantly search and find detailed player information using their UID. Get accurate stats about any Battlegrounds Mobile India player.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#finder" class="group relative inline-flex items-center justify-center overflow-hidden rounded-lg bg-accent-600 px-8 py-4 font-medium text-white transition duration-300 ease-out">
+                            <span class="absolute inset-0 h-full w-full scale-0 rounded-lg bg-white/10 transition-all duration-500 ease-out group-hover:scale-100"></span>
+                            <span class="relative flex items-center">
+                                <i class='bx bx-search-alt mr-2 text-xl'></i>
+                                Find Player
+                            </span>
+                        </a>
+                        <a href="#features" class="group relative inline-flex items-center justify-center overflow-hidden rounded-lg bg-gray-200 dark:bg-gray-700 px-8 py-4 font-medium text-gray-800 dark:text-gray-200 transition duration-300 ease-out">
+                            <span class="absolute inset-0 h-full w-full scale-0 rounded-lg bg-gray-300/50 dark:bg-gray-600/50 transition-all duration-500 ease-out group-hover:scale-100"></span>
+                            <span class="relative flex items-center">
+                                <i class='bx bx-info-circle mr-2 text-xl'></i>
+                                Learn More
+                            </span>
+                        </a>
+                    </div>
+                    <div class="mt-10 flex items-center space-x-6">
+                        <div class="flex -space-x-2">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-10 h-10 rounded-full border-2 border-white dark:border-gray-800">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="w-10 h-10 rounded-full border-2 border-white dark:border-gray-800">
+                            <img src="https://randomuser.me/api/portraits/men/46.jpg" alt="User" class="w-10 h-10 rounded-full border-2 border-white dark:border-gray-800">
+                            <div class="w-10 h-10 rounded-full border-2 border-white dark:border-gray-800 bg-accent-100 dark:bg-accent-900 flex items-center justify-center text-accent-600 dark:text-accent-400 text-xs font-medium">
+                                +5k
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center">
+                                <div class="flex">
+                                    <i class='bx bxs-star text-yellow-400'></i>
+                                    <i class='bx bxs-star text-yellow-400'></i>
+                                    <i class='bx bxs-star text-yellow-400'></i>
+                                    <i class='bx bxs-star text-yellow-400'></i>
+                                    <i class='bx bxs-star-half text-yellow-400'></i>
+                                </div>
+                                <span class="ml-2 text-gray-700 dark:text-gray-300">4.8/5 from 2.3k+ users</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 flex justify-center animate-fade-in">
+                    <div class="relative">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-accent-500 via-tertiary-500 to-secondary-500 rounded-2xl blur opacity-30 dark:opacity-40 animate-pulse-slow"></div>
+                        <div class="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 card-3d">
+                            <div class="relative overflow-hidden rounded-xl mb-6">
+                                <div class="absolute inset-0 bg-gradient-to-r from-accent-500/20 to-tertiary-500/20 animate-pulse-slow"></div>
+                                <img src="https://placeholder.pics/svg/500x300/DEDEDE/555555/BGMI%20GAMEPLAY" alt="BGMI Gameplay" class="rounded-xl w-full max-w-md mx-auto">
+                                <div class="absolute top-4 right-4 bg-accent-500 text-white text-xs font-medium px-2 py-1 rounded-md">
+                                    LIVE
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-r from-accent-500 to-tertiary-500 flex items-center justify-center text-white font-bold text-lg">
+                                        P
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-lg">ProGamer123</h3>
+                                        <div class="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                                            <i class='bx bx-id-card mr-1'></i>
+                                            <span>UID: 5123456789</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="pulse-ring">
+                                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                    </div>
+                                    <span class="text-green-600 dark:text-green-400 text-sm font-medium">Online</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-3">
+                                <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-3 text-center">
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">K/D Ratio</p>
+                                    <p class="text-xl font-bold text-accent-600 dark:text-accent-400">5.67</p>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-3 text-center">
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Matches</p>
+                                    <p class="text-xl font-bold text-accent-600 dark:text-accent-400">1,245</p>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-3 text-center">
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Win Rate</p>
+                                    <p class="text-xl font-bold text-accent-600 dark:text-accent-400">18.5%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-20">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
+                    <div class="text-center animate-fade-in" style="animation-delay: 200ms;">
+                        <div class="w-16 h-16 mx-auto bg-accent-100 dark:bg-accent-900 rounded-full flex items-center justify-center mb-3">
+                            <i class='bx bx-search-alt text-2xl text-accent-600 dark:text-accent-400'></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-1">10M+</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Searches</p>
+                    </div>
+                    <div class="text-center animate-fade-in" style="animation-delay: 400ms;">
+                        <div class="w-16 h-16 mx-auto bg-accent-100 dark:bg-accent-900 rounded-full flex items-center justify-center mb-3">
+                            <i class='bx bx-user text-2xl text-accent-600 dark:text-accent-400'></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-1">5M+</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Players</p>
+                    </div>
+                    <div class="text-center animate-fade-in" style="animation-delay: 600ms;">
+                        <div class="w-16 h-16 mx-auto bg-accent-100 dark:bg-accent-900 rounded-full flex items-center justify-center mb-3">
+                            <i class='bx bx-time text-2xl text-accent-600 dark:text-accent-400'></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-1">0.5s</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Response Time</p>
+                    </div>
+                    <div class="text-center animate-fade-in" style="animation-delay: 800ms;">
+                        <div class="w-16 h-16 mx-auto bg-accent-100 dark:bg-accent-900 rounded-full flex items-center justify-center mb-3">
+                            <i class='bx bx-check-shield text-2xl text-accent-600 dark:text-accent-400'></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-1">99.9%</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Accuracy</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Animated Shapes -->
+        <div class="hidden lg:block">
+            <div class="absolute top-32 left-10 w-16 h-16 bg-accent-500/20 rounded-full animate-float" style="animation-delay: 0s;"></div>
+            <div class="absolute top-60 right-20 w-10 h-10 bg-tertiary-500/20 rounded-full animate-float" style="animation-delay: 1s;"></div>
+            <div class="absolute bottom-20 left-1/4 w-12 h-12 bg-secondary-500/20 rounded-full animate-float" style="animation-delay: 2s;"></div>
+        </div>
+    </section>
+
+    <!-- Finder Section -->
+    <section id="finder" class="py-20 bg-gray-100 dark:bg-gray-800 relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-accent-500/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-10 -left-20 w-60 h-60 bg-tertiary-500/10 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-12 animate-fade-in">
+                <div class="inline-block mb-3">
+                    <span class="inline-block py-1 px-3 bg-accent-100 dark:bg-accent-900 text-accent-600 dark:text-accent-400 rounded-full text-sm font-medium">
+                        Powerful Search
+                    </span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">BGMI Username Finder</h2>
+                <p class="text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">Enter a BGMI player's UID to instantly fetch their username and detailed profile statistics.</p>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-6 md:p-8 animate-slide-up">
+                    <form id="finder-form" class="mb-6">
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <div class="flex-1">
+                                <label for="uid" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Player UID</label>
+                                <div class="relative">
+                                    <i class='bx bx-id-card absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400'></i>
+                                    <input type="text" id="uid" name="uid" placeholder="Enter BGMI UID (e.g., 5123456789)" class="w-full pl-12 pr-4 py-4 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-accent-500 transition-all text-lg" required>
+                                </div>
+                            </div>
+                            <div class="md:self-end">
+                                <button type="submit" class="w-full md:w-auto bg-accent-600 hover:bg-accent-700 text-white font-medium py-4 px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-accent-600/30 flex items-center justify-center space-x-2">
+                                    <i class='bx bx-search-alt text-xl'></i>
+                                    <span>Search</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <!-- States Container -->
+                    <div class="border-t border-gray-200 dark:border-gray-700 pt-6">
+                        <!-- Initial State -->
+                        <div id="initial-state" class="text-center py-10">
+                            <div class="w-20 h-20 mx-auto bg-accent-100 dark:bg-accent-900 rounded-full flex items-center justify-center mb-4">
+                                <i class='bx bx-search-alt text-4xl text-accent-600 dark:text-accent-400'></i>
+                            </div>
+                            <h3 class="text-xl font-medium mb-2">Search for a Player</h3>
+                            <p class="text-gray-600 dark:text-gray-400 max-w-md mx-auto">Enter a BGMI player's UID above to see their detailed profile and statistics.</p>
+                        </div>
+                        
+                        <!-- Loading State -->
+                        <div id="loading-state" class="hidden">
+                            <div class="flex flex-col items-center justify-center py-10">
+                                <div class="loader mb-4"></div>
+                                <h3 class="text-xl font-medium mb-2">Searching Player...</h3>
+                                <p class="text-gray-600 dark:text-gray-400 max-w-md mx-auto">Fetching data from BGMI servers. This won't take long.</p>
+                                <div class="w-full max-w-md mt-6 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                    <div class="progress-bar h-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Results Container -->
+                        <div id="results-container" class="hidden">
+                            <div class="flex flex-col md:flex-row gap-6">
+                                <div class="md:w-1/3">
+                                    <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 text-center gradient-border">
+                                        <div class="w-24 h-24 mx-auto bg-gradient-to-r from-accent-500 to-tertiary-500 rounded-full flex items-center justify-center mb-4 glow">
+                                            <i class='bx bxs-user text-4xl text-white'></i>
+                                        </div>
+                                        <h3 id="player-name" class="text-2xl font-bold mb-1">Player Name</h3>
+                                        <p id="player-uid" class="text-gray-600 dark:text-gray-400 mb-3">UID: 5123456789</p>
+                                        <div class="inline-flex items-center space-x-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">
+                                            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                            <span>Online</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="md:w-2/3">
+                                    <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-6">
+                                        <h4 class="text-lg font-semibold mb-4 flex items-center">
+                                            <i class='bx bx-stats text-accent-500 mr-2'></i>
+                                            Player Statistics
+                                        </h4>
+                                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                            <div class="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-sm hover:shadow-md transition-all">
+                                                <p class="text-gray-500 dark:text-gray-400 text-sm mb-1">Level</p>
+                                                <p id="player-level" class="text-2xl font-bold">75</p>
+                                                <div class="mt-2 h-1 w-full bg-gray-200 dark:bg-gray-700 rounded-full">
+                                                    <div class="h-1 bg-accent-500 rounded-full" style="width: 75%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-sm hover:shadow-md transition-all">
+                                                <p class="text-gray-500 dark:text-gray-400 text-sm mb-1">K/D Ratio</p>
+                                                <p id="player-kd" class="text-2xl font-bold">5.67</p>
+                                                <div class="mt-2 flex items-center text-xs text-green-600 dark:text-green-400">
+                                                    <i class='bx bx-up-arrow-alt'></i>
+                                                    <span>+0.3 from last week</span>
+                                                </div>
+                                            </div>
+                                            <div class="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-sm hover:shadow-md transition-all">
+                                                <p class="text-gray-500 dark:text-gray-400 text-sm mb-1">Matches</p>
+                                                <p id="player-matches" class="text-2xl font-bold">1,245</p>
+                                                <div class="mt-2 flex items-center text-xs text-gray-500 dark:text-gray-400">
+                                                    <span>Last match: 2h ago</span>
+                                                </div>
+                                            </div>
+                                            <div class="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-sm hover:shadow-md transition-all">
+                                                <p class="text-gray-500 dark:text-gray-400 text-sm mb-1">Win Rate</p>
+                                                <p id="player-winrate" class="text-2xl font-bold">18.5%</p>
+                                                <div class="mt-2 h-1 w-full bg-gray-200 dark:bg-gray-700 rounded-full">
+                                                    <div class="h-1 bg-tertiary-500 rounded-full" style="width: 18.5%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-sm hover:shadow-md transition-all">
+                                                <p class="text-gray-500 dark:text-gray-400 text-sm mb-1">Tier</p>
+                                                <p id="player-tier" class="text-2xl font-bold">Ace</p>
+                                                <div class="mt-2 flex items-center text-xs text-accent-500 dark:text-accent-400">
+                                                    <i class='bx bx-crown'></i>
+                                                    <span>Top 5% of players</span>
+                                                </div>
+                                            </div>
+                                            <div class="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-sm hover:shadow-md transition-all">
+                                                <p class="text-gray-500 dark:text-gray-400 text-sm mb-1">Headshot %</p>
+                                                <p id="player-headshot" class="text-2xl font-bold">32.1%</p>
+                                                <div class="mt-2 h-1 w-full bg-gray-200 dark:bg-gray-700 rounded-full">
+                                                    <div class="h-1 bg-secondary-500 rounded-full" style="width: 32.1%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-6 flex justify-end">
+                                            <button class="flex items-center space-x-2 text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300 transition-all">
+                                                <span>View Full Profile</span>
+                                                <i class='bx bx-right-arrow-alt'></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Error Message -->
+                        <div id="error-message" class="hidden">
+                            <div class="flex flex-col items-center justify-center py-10">
+                                <div class="w-20 h-20 mx-auto bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center mb-4 animate-shake">
+                                    <i class='bx bx-error-circle text-4xl text-red-600 dark:text-red-400'></i>
+                                </div>
+                                <h3 class="text-xl font-medium mb-2 text-red-600 dark:text-red-400">Player Not Found</h3>
+                                <p class="text-gray-600 dark:text-gray-400 max-w-md mx-auto text-center">We couldn't find a player with that UID. Please check the UID and try again.</p>
+                                <button id="try-again-btn" class="mt-6 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 font-medium py-2 px-6 rounded-lg transition-all">
+                                    Try Again
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Success Message -->
+                        <div id="success-message" class="hidden">
+                            <div class="flex flex-col items-center justify-center py-10">
+                                <div class="success-checkmark mb-4">
+                                    <div class="check-icon"></div>
+                                </div>
+                                <h3 class="text-xl font-medium mb-2 text-green-600 dark:text-green-400">Player Found!</h3>
+                                <p class="text-gray-600 dark:text-gray-400 max-w-md mx-auto text-center">We've successfully found the player. Here are their details.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Searches -->
+                <div class="mt-8 bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-6 animate-slide-up" style="animation-delay: 200ms;">
+                    <h4 class="text-lg font-semibold mb-4 flex items-center">
+                        <i class='bx bx-history text-accent-500 mr-2'></i>
+                        Recent Searches
+                    </h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="text-left text-gray-500 dark:text-gray-400 text-sm">
+                                    <th class="pb-3 font-medium">Player</th>
+                                    <th class="pb-3 font-medium">UID</th>
+                                    <th class="pb-3 font-medium">Level</th>
+                                    <th class="pb-3 font-medium">K/D</th>
+                                    <th class="pb-3 font-medium">Searched</th>
+                                    <th class="pb-3 font-medium"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
+                                    <td class="py-3">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-8 h-8 rounded-full bg-gradient-to-r from-accent-500 to-tertiary-500 flex items-center justify-center text-white font-bold text-xs">
+                                                P
+                                            </div>
+                                            <span class="font-medium">ProGamer123</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-3 text-gray-600 dark:text-gray-400">5123456789</td>
+                                    <td class="py-3">75</td>
+                                    <td class="py-3">5.67</td>
+                                    <td class="py-3 text-gray-600 dark:text-gray-400">2 mins ago</td>
+                                    <td class="py-3">
+                                        <button class="text-accent-500 hover:text-accent-600 dark:text-accent-400 dark:hover:text-accent-300">
+                                            <i class='bx bx-search-alt'></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
+                                    <td class="py-3">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-8 h-8 rounded-full bg-gradient-to-r from-secondary-500 to-tertiary-500 flex items-center justify-center text-white font-bold text-xs">
+                                                N
+                                            </div>
+                                            <span class="font-medium">NinjaWarrior</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-3 text-gray-600 dark:text-gray-400">5987654321</td>
+                                    <td class="py-3">82</td>
+                                    <td class="py-3">6.21</td>
+                                    <td class="py-3 text-gray-600 dark:text-gray-400">1 hour ago</td>
+                                    <td class="py-3">
+                                        <button class="text-accent-500 hover:text-accent-600 dark:text-accent-400 dark:hover:text-accent-300">
+                                            <i class='bx bx-search-alt'></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
+                                    <td class="py-3">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-8 h-8 rounded-full bg-gradient-to-r from-accent-500 to-secondary-500 flex items-center justify-center text-white font-bold text-xs">
+                                                S
+                                            </div>
+                                            <span class="font-medium">SniperElite</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-3 text-gray-600 dark:text-gray-400">5543217890</td>
+                                    <td class="py-3">68</td>
+                                    <td class="py-3">4.89</td>
+                                    <td class="py-3 text-gray-600 dark:text-gray-400">3 hours ago</td>
+                                    <td class="py-3">
+                                        <button class="text-accent-500 hover:text-accent-600 dark:text-accent-400 dark:hover:text-accent-300">
+                                            <i class='bx bx-search-alt'></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-fade-in">
+                <div class="inline-block mb-3">
+                    <span class="inline-block py-1 px-3 bg-accent-100 dark:bg-accent-900 text-accent-600 dark:text-accent-400 rounded-full text-sm font-medium">
+                        Powerful Features
+                    </span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Why Use Our Finder</h2>
+                <p class="text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">Discover the advantages of using our BGMI Username Finder tool.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-500 hover:shadow-xl hover:-translate-y-2 animate-fade-in card-3d">
+                    <div class="w-14 h-14 bg-gradient-to-r from-accent-500 to-accent-600 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-accent-500/20">
+                        <i class='bx bx-timer text-2xl text-white'></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Instant Results</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">Get player information in milliseconds with our optimized search algorithm and high-performance servers.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-600 dark:text-gray-400">
+                            <i class='bx bx-check text-green-500 mr-2'></i>
+                            <span>Lightning-fast response time</span>
+                        </li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-400">
+                            <i class='bx bx-check text-green-500 mr-2'></i>
+                            <span>Optimized database queries</span>
+                        </li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-400">
+                            <i class='bx bx-check text-green-500 mr-2'></i>
+                            <span>Global CDN for low latency</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-500 hover:shadow-xl hover:-translate-y-2 animate-fade-in card-3d" style="animation-delay: 100ms;">
+                    <div class="w-14 h-14 bg-gradient-to-r from-tertiary-500 to-tertiary-600 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-tertiary-500/20">
+                        <i class='bx bx-stats text-2xl text-white'></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Detailed Stats</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">View comprehensive player statistics including K/D ratio, win rate, headshot percentage and more.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-600 dark:text-gray-400">
+                            <i class='bx bx-check text-green-500 mr-2'></i>
+                            <span>In-depth performance metrics</span>
+                        </li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-400">
+                            <i class='bx bx-check text-green-500 mr-2'></i>
+                            <span>Historical performance tracking</span>
+                        </li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-400">
+                            <i class='bx bx-check text-green-500 mr-2'></i>
+                            <span>Compare with global averages</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-500 hover:shadow-xl hover:-translate-y-2 animate-fade-in card-3d" style="animation-delay: 200ms;">
+                    <div class="w-14 h-14 bg-gradient-to-r from-secondary-500 to-secondary-600 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-secondary-500/20">
+                        <i class='bx bx-history text-2xl text-white'></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Search History</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">Keep track of your recent searches for quick access to frequently checked players and their stats.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-600 dark:text-gray-400">
+                            <i class='bx bx-check text-green-500 mr-2'></i>
+                            <span>Save recent searches</span>
+                        </li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-400">
+                            <i class='bx bx-check text-green-500 mr-2'></i>
+                            <span>One-click search repeat</span>
+                        </li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-400">
+                            <i class='bx bx-check text-green-500 mr-2'></i>
+                            <span>Track player progress over time</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-500 hover:shadow-xl hover:-translate-y-2 animate-fade-in card-3d" style="animation-delay: 300ms;">
+                    <div class="w-14 h-14 bg-gradient-to-r from-accent-500 to-tertiary-500 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-accent-500/20">
+                        <i class='bx bx-mobile-alt text-2xl text-white'></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Mobile Friendly</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">Use our tool on any device with a fully responsive design optimized for mobile, tablet, and desktop.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-600 dark:text-gray-400">
+                            <i class='bx bx-check text-green-500 mr-2'></i>
+                            <span>Responsive on all devices</span>
+                        </li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-400">
+                            <i class='bx bx-check text-green-500 mr-2'></i>
+                            <span>Touch-optimized interface</span>
+                        </li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-400">
+                            <i class='bx bx-check text-green-500 mr-2'></i>
+                            <span>Fast loading on mobile networks</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-500 hover:shadow-xl hover:-translate-y-2 animate-fade-in card-3d" style="animation-delay: 400ms;">
+                    <div class="w-14 h-14 bg-gradient-to-r from-tertiary-500 to-secondary-500 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-tertiary-500/20">
+                        <i class='bx bx-shield-quarter text-2xl text-white'></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Secure & Private</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">We don't store any personal data and all searches are encrypted for your privacy and security.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-600 dark:text-gray-400">
+                            <i class='bx bx-check text-green-500 mr-2'></i>
+                            <span>End-to-end encryption</span>
+                        </li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-400">
+                            <i class='bx bx-check text-green-500 mr-2'></i>
+                            <span>No personal data storage</span>
+                        </li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-400">
+                            <i class='bx bx-check text-green-500 mr-2'></i>
+                            <span>GDPR compliant privacy</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-500 hover:shadow-xl hover:-translate-y-2 animate-fade-in card-3d" style="animation-delay: 500ms;">
+                    <div class="w-14 h-14 bg-gradient-to-r from-secondary-500 to-accent-500 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-secondary-500/20">
+                        <i class='bx bx-refresh text-2xl text-white'></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Always Updated</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">Our database is constantly updated to provide the most recent and accurate player information.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-600 dark:text-gray-400">
+                            <i class='bx bx-check text-green-500 mr-2'></i>
+                            <span>Real-time data synchronization</span>
+                        </li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-400">
+                            <i class='bx bx-check text-green-500 mr-2'></i>
+                            <span>Latest game version support</span>
+                        </li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-400">
+                            <i class='bx bx-check text-green-500 mr-2'></i>
+                            <span>Automatic database updates</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Feature Highlight -->
+            <div class="mt-20 bg-gradient-to-r from-accent-500/10 to-tertiary-500/10 rounded-3xl p-8 md:p-12 animate-fade-in">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                        <div class="inline-block mb-3">
+                            <span class="inline-block py-1 px-3 bg-accent-100 dark:bg-accent-900 text-accent-600 dark:text-accent-400 rounded-full text-sm font-medium">
+                                Premium Feature
+                            </span>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4">Player Comparison Tool</h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-6">Compare stats between two players side by side to see who has the edge in different aspects of the game.</p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <i class='bx bx-check-circle text-accent-500 text-xl mr-2 mt-0.5'></i>
+                                <span>Side-by-side stat comparison</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class='bx bx-check-circle text-accent-500 text-xl mr-2 mt-0.5'></i>
+                                <span>Visual graphs and charts</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class='bx bx-check-circle text-accent-500 text-xl mr-2 mt-0.5'></i>
+                                <span>Historical performance tracking</span>
+                            </li>
+                        </ul>
+                        <button class="bg-accent-600 hover:bg-accent-700 text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-accent-600/30 flex items-center">
+                            <span>Try Comparison Tool</span>
+                            <i class='bx bx-right-arrow-alt ml-2'></i>
+                        </button>
+                    </div>
+                    <div class="md:w-1/2">
+                        <div class="relative">
+                            <div class="absolute -inset-1 bg-gradient-to-r from-accent-500 to-tertiary-500 rounded-2xl blur opacity-30 dark:opacity-40 animate-pulse-slow"></div>
+                            <div class="relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 card-3d">
+                                <img src="https://placeholder.pics/svg/600x300/DEDEDE/555555/PLAYER%20COMPARISON" alt="Player Comparison" class="rounded-xl w-full">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-gray-100 dark:bg-gray-800 relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-40 -left-20 w-60 h-60 bg-accent-500/10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-10 right-20 w-40 h-40 bg-tertiary-500/10 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16 animate-fade-in">
+                <div class="inline-block mb-3">
+                    <span class="inline-block py-1 px-3 bg-accent-100 dark:bg-accent-900 text-accent-600 dark:text-accent-400 rounded-full text-sm font-medium">
+                        User Feedback
+                    </span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">What Our Users Say</h2>
+                <p class="text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">Hear from the BGMI community about their experience with our Username Finder tool.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-6 animate-fade-in card-3d">
+                    <div class="flex items-center mb-4">
+                        <div class="flex">
+                            <i class='bx bxs-star text-yellow-400'></i>
+                            <i class='bx bxs-star text-yellow-400'></i>
+                            <i class='bx bxs-star text-yellow-400'></i>
+                            <i class='bx bxs-star text-yellow-400'></i>
+                            <i class='bx bxs-star text-yellow-400'></i>
+                        </div>
+                        <span class="ml-2 text-gray-600 dark:text-gray-400 text-sm">5.0</span>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300 mb-6">"This tool is a game-changer! I can quickly look up any player's stats before teaming up with them. The interface is clean and the results are lightning fast."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Rajesh Kumar</h4>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm">Pro BGMI Player</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-6 animate-fade-in card-3d" style="animation-delay: 100ms;">
+                    <div class="flex items-center mb-4">
+                        <div class="flex">
+                            <i class='bx bxs-star text-yellow-400'></i>
+                            <i class='bx bxs-star text-yellow-400'></i>
+                            <i class='bx bxs-star text-yellow-400'></i>
+                            <i class='bx bxs-star text-yellow-400'></i>
+                            <i class='bx bxs-star-half text-yellow-400'></i>
+                        </div>
+                        <span class="ml-2 text-gray-600 dark:text-gray-400 text-sm">4.5</span>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300 mb-6">"I use this tool daily to track my progress and compare my stats with friends. The detailed breakdown of performance metrics helps me identify areas where I need to improve."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Priya Sharma</h4>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm">BGMI Enthusiast</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-6 animate-fade-in card-3d" style="animation-delay: 200ms;">
+                    <div class="flex items-center mb-4">
+                        <div class="flex">
+                            <i class='bx bxs-star text-yellow-400'></i>
+                            <i class='bx bxs-star text-yellow-400'></i>
+                            <i class='bx bxs-star text-yellow-400'></i>
+                            <i class='bx bxs-star text-yellow-400'></i>
+                            <i class='bx bxs-star text-yellow-400'></i>
+                        </div>
+                        <span class="ml-2 text-gray-600 dark:text-gray-400 text-sm">5.0</span>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300 mb-6">"As a tournament organizer, this tool is invaluable for verifying player credentials quickly. The search history feature saves me tons of time when checking returning players."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/men/46.jpg" alt="User" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Vikram Singh</h4>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm">Tournament Organizer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stats Counter -->
+            <div class="mt-16 bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-8 animate-fade-in">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="text-4xl font-bold mb-2 gradient-text" id="counter-users">0</div>
+                        <p class="text-gray-600 dark:text-gray-400">Active Users</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold mb-2 gradient-text" id="counter-searches">0</div>
+                        <p class="text-gray-600 dark:text-gray-400">Searches Per Day</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold mb-2 gradient-text" id="counter-players">0</div>
+                        <p class="text-gray-600 dark:text-gray-400">Players in Database</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold mb-2 gradient-text" id="counter-countries">0</div>
+                        <p class="text-gray-600 dark:text-gray-400">Countries Covered</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-fade-in">
+                <div class="inline-block mb-3">
+                    <span class="inline-block py-1 px-3 bg-accent-100 dark:bg-accent-900 text-accent-600 dark:text-accent-400 rounded-full text-sm font-medium">
+                        Got Questions?
+                    </span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+                <p class="text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">Find answers to common questions about our BGMI Username Finder.</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="space-y-6 animate-fade-in">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
+                        <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                            <span class="font-medium text-lg">How do I find a player's username?</span>
+                            <i class='bx bx-chevron-down text-2xl text-accent-500 transition-transform duration-300'></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-6">
+                            <p class="text-gray-700 dark:text-gray-300">Enter the player's UID in the search box on our finder page and click the search button. The system will fetch and display the player's username and detailed stats if found. The search process typically takes less than a second.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
+                        <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                            <span class="font-medium text-lg">Where can I find a player's UID?</span>
+                            <i class='bx bx-chevron-down text-2xl text-accent-500 transition-transform duration-300'></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-6">
+                            <p class="text-gray-700 dark:text-gray-300">You can find a player's UID in BGMI by viewing their profile. It's usually displayed at the top of their profile page or in the player info section. You can also ask the player directly to share their UID with you.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
+                        <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                            <span class="font-medium text-lg">Is this service free to use?</span>
+                            <i class='bx bx-chevron-down text-2xl text-accent-500 transition-transform duration-300'></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-6">
+                            <p class="text-gray-700 dark:text-gray-300">Yes, our basic BGMI Username Finder is completely free to use with no hidden charges. We do offer premium features like player comparison and advanced analytics for a small subscription fee, but the core functionality remains free for everyone.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
+                        <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                            <span class="font-medium text-lg">How accurate is the player information?</span>
+                            <i class='bx bx-chevron-down text-2xl text-accent-500 transition-transform duration-300'></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-6">
+                            <p class="text-gray-700 dark:text-gray-300">Our data is synchronized with the BGMI servers and updated regularly. The information is typically 99.9% accurate, but there might be a slight delay (usually less than 30 minutes) in reflecting very recent changes to a player's profile or stats after a match.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
+                        <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                            <span class="font-medium text-lg">Can I search for multiple players at once?</span>
+                            <i class='bx bx-chevron-down text-2xl text-accent-500 transition-transform duration-300'></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-6">
+                            <p class="text-gray-700 dark:text-gray-300">Currently, our free tool supports searching for one player at a time. However, you can perform multiple searches in quick succession. Our premium version offers batch searching capabilities where you can upload a list of UIDs and get results for all of them at once.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
+                        <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                            <span class="font-medium text-lg">Is my search history private?</span>
+                            <i class='bx bx-chevron-down text-2xl text-accent-500 transition-transform duration-300'></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-6">
+                            <p class="text-gray-700 dark:text-gray-300">Yes, your search history is stored locally on your device and is not shared with other users. We take privacy seriously and do not track individual searches on our servers. You can clear your search history at any time from the settings menu.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Still Have Questions -->
+                <div class="mt-12 text-center animate-fade-in">
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">Still have questions? We're here to help!</p>
+                    <a href="#contact" class="inline-flex items-center space-x-2 bg-accent-600 hover:bg-accent-700 text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-accent-600/30">
+                        <i class='bx bx-message-dots'></i>
+                        <span>Contact Support</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-100 dark:bg-gray-800 relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute -top-20 -left-20 w-60 h-60 bg-accent-500/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 -right-20 w-40 h-40 bg-tertiary-500/10 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16 animate-fade-in">
+                <div class="inline-block mb-3">
+                    <span class="inline-block py-1 px-3 bg-accent-100 dark:bg-accent-900 text-accent-600 dark:text-accent-400 rounded-full text-sm font-medium">
+                        Get In Touch
+                    </span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Contact Us</h2>
+                <p class="text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">Have questions or feedback? We'd love to hear from you!</p>
+            </div>
+            
+            <div class="max-w-5xl mx-auto">
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <div class="lg:w-1/3">
+                        <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-6 animate-fade-in">
+                            <h3 class="text-xl font-bold mb-6 flex items-center">
+                                <i class='bx bx-info-circle text-accent-500 mr-2'></i>
+                                Contact Information
+                            </h3>
+                            <div class="space-y-6">
+                                <div class="flex items-start">
+                                    <div class="w-10 h-10 bg-accent-100 dark:bg-accent-900 rounded-lg flex items-center justify-center mr-4">
+                                        <i class='bx bx-envelope text-accent-600 dark:text-accent-400'></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium mb-1">Email Us</h4>
+                                        <p class="text-gray-600 dark:text-gray-400">support@bgmifinder.com</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="w-10 h-10 bg-accent-100 dark:bg-accent-900 rounded-lg flex items-center justify-center mr-4">
+                                        <i class='bx bx-phone text-accent-600 dark:text-accent-400'></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium mb-1">Call Us</h4>
+                                        <p class="text-gray-600 dark:text-gray-400">+91 98765 43210</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="w-10 h-10 bg-accent-100 dark:bg-accent-900 rounded-lg flex items-center justify-center mr-4">
+                                        <i class='bx bx-map text-accent-600 dark:text-accent-400'></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium mb-1">Location</h4>
+                                        <p class="text-gray-600 dark:text-gray-400">Bangalore, India</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                                <h4 class="font-medium mb-4">Follow Us</h4>
+                                <div class="flex space-x-4">
+                                    <a href="#" class="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-accent-100 hover:text-accent-600 dark:hover:bg-accent-900 dark:hover:text-accent-400 transition-all">
+                                        <i class='bx bxl-facebook'></i>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-accent-100 hover:text-accent-600 dark:hover:bg-accent-900 dark:hover:text-accent-400 transition-all">
+                                        <i class='bx bxl-twitter'></i>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-accent-100 hover:text-accent-600 dark:hover:bg-accent-900 dark:hover:text-accent-400 transition-all">
+                                        <i class='bx bxl-instagram'></i>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-accent-100 hover:text-accent-600 dark:hover:bg-accent-900 dark:hover:text-accent-400 transition-all">
+                                        <i class='bx bxl-discord'></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:w-2/3">
+                        <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-6 md:p-8 animate-slide-up">
+                            <h3 class="text-xl font-bold mb-6 flex items-center">
+                                <i class='bx bx-message-dots text-accent-500 mr-2'></i>
+                                Send Us a Message
+                            </h3>
+                            <form id="contact-form">
+                                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                    <div>
+                                        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your Name</label>
+                                        <input type="text" id="name" name="name" placeholder="Enter your name" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-accent-500 transition-all">
+                                    </div>
+                                    <div>
+                                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
+                                        <input type="email" id="email" name="email" placeholder="Enter your email" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-accent-500 transition-all">
+                                    </div>
+                                </div>
+                                <div class="mb-6">
+                                    <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Subject</label>
+                                    <input type="text" id="subject" name="subject" placeholder="Enter subject" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-accent-500 transition-all">
+                                </div>
+                                <div class="mb-6">
+                                    <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
+                                    <textarea id="message" name="message" rows="5" placeholder="Enter your message" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-accent-500 transition-all"></textarea>
+                                </div>
+                                <button type="submit" class="w-full bg-accent-600 hover:bg-accent-700 text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-accent-600/30 flex items-center justify-center">
+                                    <i class='bx bx-send mr-2'></i>
+                                    <span>Send Message</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16 relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-500 via-tertiary-500 to-secondary-500"></div>
+            <div class="absolute -top-40 -right-40 w-80 h-80 bg-accent-500/5 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-tertiary-500/5 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="relative w-10 h-10">
+                            <div class="absolute inset-0 bg-gradient-to-r from-accent-500 to-tertiary-500 rounded-lg animate-pulse-slow"></div>
+                            <div class="absolute inset-0.5 bg-gray-900 rounded-lg flex items-center justify-center">
+                                <i class='bx bxs-game text-accent-400 text-2xl'></i>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="font-bold text-xl gradient-text">BGMI Finder</span>
+                            <span class="text-xs text-gray-500 block">Pro Version</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6">The ultimate tool for finding BGMI player information using their UID. Fast, accurate, and secure.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-accent-400 transition-all">
+                            <i class='bx bxl-facebook text-xl'></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-accent-400 transition-all">
+                            <i class='bx bxl-twitter text-xl'></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-accent-400 transition-all">
+                            <i class='bx bxl-instagram text-xl'></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-accent-400 transition-all">
+                            <i class='bx bxl-discord text-xl'></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-accent-400 transition-all flex items-center"><i class='bx bx-chevron-right mr-2 text-accent-500'></i>Home</a></li>
+                        <li><a href="#finder" class="text-gray-400 hover:text-accent-400 transition-all flex items-center"><i class='bx bx-chevron-right mr-2 text-accent-500'></i>Username Finder</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-accent-400 transition-all flex items-center"><i class='bx bx-chevron-right mr-2 text-accent-500'></i>Features</a></li>
+                        <li><a href="#testimonials" class="text-gray-400 hover:text-accent-400 transition-all flex items-center"><i class='bx bx-chevron-right mr-2 text-accent-500'></i>Testimonials</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-accent-400 transition-all flex items-center"><i class='bx bx-chevron-right mr-2 text-accent-500'></i>FAQ</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-accent-400 transition-all flex items-center"><i class='bx bx-chevron-right mr-2 text-accent-500'></i>Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Resources</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-accent-400 transition-all flex items-center"><i class='bx bx-chevron-right mr-2 text-accent-500'></i>BGMI Official</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-accent-400 transition-all flex items-center"><i class='bx bx-chevron-right mr-2 text-accent-500'></i>Player Rankings</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-accent-400 transition-all flex items-center"><i class='bx bx-chevron-right mr-2 text-accent-500'></i>Game Updates</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-accent-400 transition-all flex items-center"><i class='bx bx-chevron-right mr-2 text-accent-500'></i>Community</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-accent-400 transition-all flex items-center"><i class='bx bx-chevron-right mr-2 text-accent-500'></i>Support</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-accent-400 transition-all flex items-center"><i class='bx bx-chevron-right mr-2 text-accent-500'></i>Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Subscribe to our newsletter for the latest updates and features.</p>
+                    <form class="mb-4">
+                        <div class="flex">
+                            <input type="email" placeholder="Your email address" class="flex-1 px-4 py-3 bg-gray-800 border border-gray-700 rounded-l-xl focus:outline-none focus:ring-2 focus:ring-accent-500 transition-all">
+                            <button type="submit" class="bg-accent-600 hover:bg-accent-700 text-white px-4 py-3 rounded-r-xl transition-all">
+                                <i class='bx bx-envelope'></i>
+                            </button>
+                        </div>
+                    </form>
+                    <p class="text-xs text-gray-500">We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 mb-4 md:mb-0">&copy; 2025 BGMI Finder. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-accent-400 transition-all text-sm">Terms of Service</a>
+                    <a href="#" class="text-gray-500 hover:text-accent-400 transition-all text-sm">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-accent-400 transition-all text-sm">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+        
+        // Theme Switcher
+        const themeSelector = document.getElementById('theme-selector');
+        const htmlElement = document.documentElement;
+        
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else if (theme === 'light') {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else if (theme === 'system') {
+                localStorage.setItem('theme', 'system');
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    htmlElement.classList.add('dark');
+                } else {
+                    htmlElement.classList.remove('dark');
+                }
+            }
+        }
+        
+        // Initialize theme
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'system';
+            themeSelector.value = savedTheme;
+            setTheme(savedTheme);
+        }
+        
+        // Listen for theme changes
+        themeSelector.addEventListener('change', () => {
+            setTheme(themeSelector.value);
+        });
+        
+        // Listen for system preference changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            if (localStorage.getItem('theme') === 'system') {
+                setTheme('system');
+            }
+        });
+        
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // FAQ Toggles
+        document.querySelectorAll('.faq-toggle').forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const content = toggle.nextElementSibling;
+                const icon = toggle.querySelector('i');
+                
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+                
+                // Close other FAQs
+                document.querySelectorAll('.faq-toggle').forEach(otherToggle => {
+                    if (otherToggle !== toggle) {
+                        const otherContent = otherToggle.nextElementSibling;
+                        const otherIcon = otherToggle.querySelector('i');
+                        
+                        otherContent.classList.add('hidden');
+                        otherIcon.classList.remove('rotate-180');
+                    }
+                });
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Active link highlighting
+        function highlightActiveLink() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('text-accent-600', 'dark:text-accent-400');
+                link.classList.add('text-gray-700', 'dark:text-gray-300');
+                
+                const linkHref = link.getAttribute('href');
+                if (linkHref === `#${currentSection}`) {
+                    link.classList.remove('text-gray-700', 'dark:text-gray-300');
+                    link.classList.add('text-accent-600', 'dark:text-accent-400');
+                    
+                    // Add active indicator
+                    const indicator = link.querySelector('span:last-child');
+                    if (indicator) {
+                        indicator.classList.add('w-full');
+                    }
+                } else {
+                    // Remove active indicator
+                    const indicator = link.querySelector('span:last-child');
+                    if (indicator) {
+                        indicator.classList.remove('w-full');
+                    }
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', highlightActiveLink);
+        window.addEventListener('load', highlightActiveLink);
+        
+        // Header scroll effect
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('py-2');
+                header.classList.remove('py-3');
+            } else {
+                header.classList.add('py-3');
+                header.classList.remove('py-2');
+            }
+        });
+        
+        // Username Finder Form Submission
+        const finderForm = document.getElementById('finder-form');
+        const initialState = document.getElementById('initial-state');
+        const loadingState = document.getElementById('loading-state');
+        const resultsContainer = document.getElementById('results-container');
+        const errorMessage = document.getElementById('error-message');
+        const successMessage = document.getElementById('success-message');
+
+        finderForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            
+            const uid = document.getElementById('uid').value.trim();
+            
+            // Hide all states
+            initialState.classList.add('hidden');
+            loadingState.classList.remove('hidden');
+            resultsContainer.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+            successMessage.classList.add('hidden');
+            
+            try {
+                const response = await fetch(`/get_user?uid=${encodeURIComponent(uid)}`);
+                const data = await response.text();
+                
+                // Hide loading state
+                loadingState.classList.add('hidden');
+                
+                if (response.ok) {
+                    successMessage.classList.remove('hidden');
+                    
+                    setTimeout(() => {
+                        successMessage.classList.add('hidden');
+                        
+                        // Update player info
+                        document.getElementById('player-name').textContent = data;
+                        document.getElementById('player-uid').textContent = `UID: ${uid}`;
+                        document.getElementById('player-level').textContent = 'N/A';
+                        document.getElementById('player-kd').textContent = 'N/A';
+                        document.getElementById('player-matches').textContent = 'N/A';
+                        document.getElementById('player-winrate').textContent = 'N/A';
+                        document.getElementById('player-tier').textContent = 'N/A';
+                        document.getElementById('player-headshot').textContent = 'N/A';
+                        
+                        // Show results
+                        resultsContainer.classList.remove('hidden');
+                    }, 1500);
+                } else {
+                    errorMessage.classList.remove('hidden');
+                    errorMessage.textContent = data || 'User not found';
+                }
+            } catch (error) {
+                loadingState.classList.add('hidden');
+                errorMessage.classList.remove('hidden');
+                errorMessage.textContent = 'An error occurred while looking up the user';
+            }
+        });
+
+        // Try Again Button
+        document.getElementById('try-again-btn').addEventListener('click', function () {
+            errorMessage.classList.add('hidden');
+            initialState.classList.remove('hidden');
+        });
+        
+        // Contact Form Submission
+        const contactForm = document.getElementById('contact-form');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            // Simple validation
+            if (name && email && subject && message) {
+                // Simulate form submission
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+                const originalBtnText = submitBtn.innerHTML;
+                
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="bx bx-loader-alt bx-spin mr-2"></i><span>Sending...</span>';
+                
+                setTimeout(() => {
+                    submitBtn.innerHTML = '<i class="bx bx-check mr-2"></i><span>Message Sent!</span>';
+                    submitBtn.classList.remove('bg-accent-600', 'hover:bg-accent-700');
+                    submitBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+                    
+                    contactForm.reset();
+                    
+                    setTimeout(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalBtnText;
+                        submitBtn.classList.add('bg-accent-600', 'hover:bg-accent-700');
+                        submitBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+                    }, 3000);
+                }, 2000);
+            } else {
+                // Show error for empty fields
+                if (!name) document.getElementById('name').classList.add('border-red-500', 'animate-shake');
+                if (!email) document.getElementById('email').classList.add('border-red-500', 'animate-shake');
+                if (!subject) document.getElementById('subject').classList.add('border-red-500', 'animate-shake');
+                if (!message) document.getElementById('message').classList.add('border-red-500', 'animate-shake');
+                
+                setTimeout(() => {
+                    document.querySelectorAll('.border-red-500').forEach(el => {
+                        el.classList.remove('border-red-500', 'animate-shake');
+                    });
+                }, 1000);
+            }
+        });
+        
+        // Stats Counter Animation
+        function animateCounter(elementId, targetValue, duration = 2000, startValue = 0) {
+            const element = document.getElementById(elementId);
+            const startTime = performance.now();
+            const updateInterval = 50; // ms
+            
+            function updateCounter(currentTime) {
+                const elapsedTime = currentTime - startTime;
+                const progress = Math.min(elapsedTime / duration, 1);
+                
+                // Easing function for smoother animation
+                const easedProgress = 1 - Math.pow(1 - progress, 3);
+                
+                const currentValue = Math.floor(startValue + easedProgress * (targetValue - startValue));
+                
+                // Format with commas for thousands
+                element.textContent = currentValue.toLocaleString();
+                
+                if (progress < 1) {
+                    setTimeout(() => requestAnimationFrame(updateCounter), updateInterval);
+                }
+            }
+            
+            requestAnimationFrame(updateCounter);
+        }
+        
+        // Intersection Observer for counter animation
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter('counter-users', 250000);
+                    animateCounter('counter-searches', 500000);
+                    animateCounter('counter-players', 5000000);
+                    animateCounter('counter-countries', 42);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        const counterSection = document.querySelector('#testimonials .mt-16');
+        if (counterSection) {
+            counterObserver.observe(counterSection);
+        }
+        
+        // Initialize the page
+        initTheme();
+        highlightActiveLink();
+    </script>
+</body>
+</html>
