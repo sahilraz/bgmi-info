@@ -1,0 +1,11 @@
+{
+  "cookies": [
+    "redeem_banner=yes",
+    "region=IN",
+    "CookieConsent={stamp:'BdwMOWyJhyeycito6a5d/RwoCYRc53JWLvyV+4GNKCHN0VPZ4HjuVw==',necessary:true,preferences:false,statistics:false,marketing:false,method:'explicit',ver:1,utc:1741942679561,region:'in'}",
+    "XSRF-TOKEN=eyJpdiI6IlRqTXgzUlJmQUhnOFB6Y2hiQXpWQ2c9PSIsInZhbHVlIjoiazBzcVFoVFZiTjhXWWxaaWppZHMzaFBGSzJMNU95RUI5M1BGV2VDaHk4R2Z1OGFHdmlSYndOR1J4SW9ueTc4UCIsIm1hYyI6ImJhY2VkODhhNDUyYTUxZWQ0ZDBlNzE3ZWRkZGQ1Y2I0NWNkMmRlMzE3NzViOWNkYjkzMDFiYjI0MTk1MmFlMGUifQ%3D%3D",
+    "unipin_session=eyJpdiI6IjRaRm1IaXBsMWRjb0RPQkZERWNJTEE9PSIsInZhbHVlIjoidlpOcmdJSXl2K0EzR0R3T21HbWxnbGhhRHJydThkM1wvYWFmQWFoOEltVnVNeU0zTUxNREt5RmhUZkk3RTRSOXhRNm85Qkd0dCtEdlBrWElOM3NJK0dxNnZjNnBuUGJjRG83aXJxd0JDNWN0MTRKYk5ZaFNkUWo0Zk14OEhNdTVtIiwibWFjIjoiNDZmMzhkZjQyN2U1OGI2YzYwODkzZWRjNWRlMzAzNjk4ZWVjZTg4MjRlNDU4Yzk4NWE5NjZhM2I0ZDQ3NTM3MCJ9"
+  ],
+  "csrf_token": "brkhUCrpV7QDfj5Quxealrx6f58CNugJZsP8rlLl",
+  "rgid": "WURTVm0wM1FzNGR1WS9jMkp1d2puQT09"
+}
