@@ -313,9 +313,9 @@ def format_response(data, user_id=None):
             username = data['unipinRes']['username']
             if user_id:
                 save_to_cache(user_id, username)
-            return {'username': username}, 200
+            return username, 200
         elif data.get('transaction') == 'FAILED':
-            return {'error': 'Incorrect Player Id'}, 404
+            return 'Incorrect Player Id', 404
         elif data.get('success') is False and data.get('statusCode') == 403:
             return {'error': data.get('message', 'Authentication failed')}, 403
         else:
@@ -334,8 +334,8 @@ def get_username():
     # Try to get from cache first
     cached_username = get_from_cache(user_id)
     if cached_username:
-        return jsonify({'username': cached_username}), 200
-    
+        return cached_username, 200
+        
     try:
         url = API_URL.format(user_id)
         response = requests.get(url, headers=HEADERS)
@@ -526,7 +526,7 @@ if __name__ == "__main__":
     application.add_handler(CommandHandler("set_image_url", update_image_url))
     application.add_handler(CallbackQueryHandler(button_handler))
     
-    print("Rooter.io Unipin Checker Bot is running...")
+    print("Robin@Urr_wissh Bgmi Name Checker Bot is running...")
     
     # Run Flask in a separate thread
     flask_thread = threading.Thread(target=run_flask)
