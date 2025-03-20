@@ -10,7 +10,7 @@ JSON_CACHE_FILE = "username_cache.json"
 
 # Bot Configuration
 OWNER_ID = 7217444967  # Replace with your actual Telegram user ID
-TOKEN = "8021336659:AAHuv-SkC9RnNwtwUYMf9UNGzrIsVYjOeic"  # Telegram Bot Token
+TOKEN = "8053615632:AAGr9Ha_h0_IrahQpYLJfdU-OWwxqg38X6g"  # Telegram Bot Token
 
 # Bot UI Configuration
 START_IMAGE_URL = "https://graph.org/file/53396de42b15a6f248d99-26191efe9c383fa3a0.jpg"  # URL for the start command image
