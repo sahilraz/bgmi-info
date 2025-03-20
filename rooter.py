@@ -325,7 +325,7 @@ def format_response(data, user_id=None):
         return {'error': str(e)}, 500
 
 # Flask routes
-@app.route('/get', methods=['GET'])
+@app.route('/bgmi', methods=['GET'])
 def get_username():
     user_id = request.args.get('id')
     if not user_id:
